@@ -79,7 +79,6 @@ function display_admin_panel(){
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-     
     .chat-container {
       width: 400px;
       height: 600px;
@@ -225,7 +224,42 @@ function display_admin_panel(){
       background-color: #f0f0f0; /* Optional: subtle hover effect */
       border-radius: 5px;
     }
-    
+      
+  .botmed{
+    right: 10px !important;
+    position: fixed !important;
+  }
+  .chaticon {
+  position: fixed !important;
+  right: 5vh;
+  bottom: 5vh;
+  color: #1976d2;
+  animation: pulseScale 2s infinite ease-in-out;
+}
+.chaticon:hover{
+  color: #0d47a1;
+}
+
+/* Keyframes for gentle scaling */
+@keyframes pulseScale {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1); /* Slight scale increase */
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+  .modal-backdrop {
+    display: none;
+  }
+  .btnnn{
+    position: absolute;
+    right: 6vh;
+  }
     </style>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
@@ -359,45 +393,6 @@ function display_admin_panel(){
    <!-- Button trigger modal -->
 <!-- Button to trigger modal -->
 <!-- Button to trigger modal -->
-<style>
-  
-  .botmed{
-    right: 10px !important;
-    position: fixed !important;
-  }
-  .chaticon {
-  position: fixed !important;
-  right: 5vh;
-  bottom: 5vh;
-  color: #1976d2;
-  animation: pulseScale 2s infinite ease-in-out;
-}
-.chaticon:hover{
-  color: #0d47a1;
-}
-
-/* Keyframes for gentle scaling */
-@keyframes pulseScale {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.1); /* Slight scale increase */
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-  .modal-backdrop {
-    display: none;
-  }
-  .btnnn{
-    position: absolute;
-    right: 6vh;
-  }
-
-</style>
 
 <!-- Button trigger modal -->
 
