@@ -46,9 +46,7 @@ function checklen()
   
 }
 
-function gotofunc1() {
-    window.location.href = "func2.html";
-  }
+
 
 </script>
 
@@ -105,7 +103,7 @@ function gotofunc1() {
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                 <h3 class="register-heading">Register as Patient</h3>
-                                <form method="post" action="func2.html">
+                                <!-- <form method="post" action="func2.html"> -->
                                 <div class="row register-form">
                                     
                                     <div class="col-md-6">
@@ -146,12 +144,13 @@ function gotofunc1() {
                                             <input type="password" class="form-control"  id="cpassword" placeholder="Confirm Password *" name="cpassword"  onkeyup='check();' required/><span id='message'></span>
                                         </div>
                                         <input type="submit" class="btnRegister" name="patsub1" onclick="return checklen();" value="Register"/>
+                                         <!-- <button class="btnRegister" onclick="gotofunc1()">Register</button> -->
                                     </div>
 
                                 </div>
-                            </form>
+                            <!-- </form> -->
                             </div>
-
+                            
                             
                             <div class="tab-pane fade show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                 <h3 class="register-heading">Login as Doctor</h3>
