@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patient Details</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+  <style>
+    .patient-table {
+      margin-top: 50px;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    .patient-table th, .patient-table td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .patient-table th {
+      background-color: #f2f2f2;
+    }
+
+    .patient-table tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    .patient-table tr:hover {
+      background-color: #ddd;
+    }
+  </style>
+</head>
+<body style="padding-top: 50px;">
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+    <a class="navbar-brand" href="#"><i class="fa fa-user-plus" aria-hidden="true"></i> MedConnect</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="index.html"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="logout.html"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Patient List Table -->
+  <div class="container mt-5 pt-5">
+    <h3 class="text-center">Patient Details</h3>
+
+    <table class="patient-table">
+      <thead>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Contact</th>
+          <th>Doctor</th>
+          <th>Payment Status</th>
+        </tr>
+      </thead>
+      <tbody id="patientTableBody">
+        <!-- Patient Data Rows will be inserted here -->
+      </tbody>
+    </table>
+  </div>
+
+  <!-- JS scripts -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+  
+  <script>
+    // Simulating patient data (replace this with dynamic data or fetch from a backend in a real app)
+    const patients = [
+      {
+        fname: 'Arun',
+        lname: 'Kumar',
+        email: 'arunkumar@email.com',
+        contact: '9791234567',
+        doctor: 'Dr. Rajesh Kumar',
+        payment: 'Paid'
+      },
+      {
+        fname: 'Sathya',
+        lname: 'Ramesh',
+        email: 'sathyaramesh@email.com',
+        contact: '9845678901',
+        doctor: 'Dr. Priya Suresh',
+        payment: 'Pay later'
+      },
+      {
+        fname: 'Nisha',
+        lname: 'Venkatesh',
+        email: 'nishavenkatesh@email.com',
+        contact: '9445678902',
+        doctor: 'Dr. Karthik Srinivasan',
+        payment: 'Paid'
+      },
+      {
+        fname: 'Vignesh',
+        lname: 'Rajendran',
+        email: 'vigneshrajendran@email.com',
+        contact: '9678901234',
+        doctor: 'Dr. Kavitha Natarajan',
+        payment: 'Pay later'
+      },
+      {
+        fname: 'Aishwarya',
+        lname: 'Subramanian',
+        email: 'aishwaryasubramanian@email.com',
+        contact: '9889012345',
+        doctor: 'Dr. Nirmala Raghavan',
+        payment: 'Paid'
+      },
+      {
+        fname: 'Surya',
+        lname: 'Muthusamy',
+        email: 'suryamuthusamy@email.com',
+        contact: '9123456789',
+        doctor: 'Dr. Siva Karthikeyan',
+        payment: 'Pay later'
+      }
+    ];
+
+    // Function to display patient data in the table
+    function displayPatients() {
+      const tableBody = document.getElementById('patientTableBody');
+      patients.forEach(patient => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${patient.fname}</td>
+          <td>${patient.lname}</td>
+          <td>${patient.email}</td>
+          <td>${patient.contact}</td>
+          <td>${patient.doctor}</td>
+          <td>${patient.payment}</td>
+        `;
+        tableBody.appendChild(row);
+      });
+    }
+
+    // Call the function to populate the table when the page loads
+    window.onload = displayPatients;
+  </script>
+
+</body>
+</html>

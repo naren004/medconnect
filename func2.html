@@ -11,6 +11,44 @@
     button:hover, #inputbtn:hover {
       cursor: pointer;
     }
+    .custom-alert {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #ffffff;
+      border: 2px solid #4CAF50;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      padding: 20px 30px;
+      z-index: 9999;
+      display: none;
+      text-align: center;
+      border-radius: 10px;
+    }
+    .custom-alert p {
+      margin-bottom: 15px;
+      font-size: 16px;
+      color: #333;
+    }
+    .custom-alert button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      font-size: 14px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .alert-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 100vw;
+      background-color: rgba(0,0,0,0.5);
+      z-index: 9998;
+      display: none;
+    }
   </style>
 </head>
 <body style="padding-top: 50px;">
@@ -54,37 +92,37 @@
             <div class="card">
               <div class="card-body">
                 <center><h4>Create an appointment</h4></center><br>
-                <form class="form-group" method="post" action="appointment.html">
-                  <div class="row">
-                    <div class="col-md-4"><label>First Name:</label></div>
-                    <div class="col-md-8"><input type="text" class="form-control" name="fname"></div><br><br>
-                    <div class="col-md-4"><label>Last Name:</label></div>
-                    <div class="col-md-8"><input type="text" class="form-control" name="lname"></div><br><br>
-                    <div class="col-md-4"><label>Email id:</label></div>
-                    <div class="col-md-8"><input type="text" class="form-control" name="email"></div><br><br>
-                    <div class="col-md-4"><label>Contact Number:</label></div>
-                    <div class="col-md-8"><input type="text" class="form-control" name="contact"></div><br><br>
-                    <div class="col-md-4"><label>Doctor:</label></div>
-                    <div class="col-md-8">
-                      <select name="doctor" class="form-control">
-                        <option value="" disabled selected>Select Doctor</option>
-                        <option value="Dr. Punam Shaw">Dr. Punam Shaw</option>
-                        <option value="Dr. Ashok Goyal">Dr. Ashok Goyal</option>
-                      </select>
-                    </div><br><br>
-                    <div class="col-md-4"><label>Payment:</label></div>
-                    <div class="col-md-8">
-                      <select name="payment" class="form-control">
-                        <option value="" disabled selected>Select Payment Status</option>
-                        <option value="Paid">Paid</option>
-                        <option value="Pay later">Pay later</option>
-                      </select>
-                    </div><br><br><br>
-                    <div class="col-md-4">
-                      <input type="submit" name="entry_submit" value="Create new entry" class="btn btn-primary" id="inputbtn">
-                    </div>
+                <div class="row">
+                  <div class="col-md-4"><label>First Name:</label></div>
+                  <div class="col-md-8"><input type="text" class="form-control" name="fname"></div><br><br>
+                  <div class="col-md-4"><label>Last Name:</label></div>
+                  <div class="col-md-8"><input type="text" class="form-control" name="lname"></div><br><br>
+                  <div class="col-md-4"><label>Email id:</label></div>
+                  <div class="col-md-8"><input type="text" class="form-control" name="email"></div><br><br>
+                  <div class="col-md-4"><label>Contact Number:</label></div>
+                  <div class="col-md-8"><input type="text" class="form-control" name="contact"></div><br><br>
+                  <div class="col-md-4"><label>Doctor:</label></div>
+                  <div class="col-md-8">
+                    <select name="doctor" class="form-control">
+                      <option value="" disabled selected>Select Doctor</option>
+                      <option value="Dr. Naveen">Dr. Naveen</option>
+                      <option value="Dr. Ashok Goyal">Dr. Ashok Goyal</option>
+                      <option value="Dr. Ravi">Dr. Ravi</option>
+                      <option value="Dr. Maheshwaran">Dr. Maheshwaran</option>
+                    </select>
+                  </div><br><br>
+                  <div class="col-md-4"><label>Payment:</label></div>
+                  <div class="col-md-8">
+                    <select name="payment" class="form-control">
+                      <option value="" disabled selected>Select Payment Status</option>
+                      <option value="Paid">Paid</option>
+                      <option value="Pay later">Pay later</option>
+                    </select>
+                  </div><br><br><br>
+                  <div class="col-md-4">
+                    <input type="submit" name="entry_submit" value="Create new entry" onclick="gotoapp()" class="btn btn-primary" id="inputbtn">
                   </div>
-                </form>
+                </div>
               </div>
             </div>
           </div><br>
@@ -92,7 +130,7 @@
           <div class="tab-pane fade" id="list-profile" role="tabpanel">
             <div class="card">
               <div class="card-body">
-                <form class="form-group" method="post" action="func.html">
+                <!-- <form class="form-group" method="post" action="func.html"> -->
                   <input type="text" name="contact" class="form-control" placeholder="enter contact"><br>
                   <select name="status" class="form-control">
                     <option value="" disabled selected>Select Payment Status to update</option>
@@ -100,34 +138,95 @@
                     <option value="pay later">pay later</option>
                   </select><br><hr>
                   <input type="submit" value="update" name="update_data" class="btn btn-primary">
-                </form>
+                <!-- </form> -->
               </div>
             </div><br><br>
           </div>
 
-          <div class="tab-pane fade" id="list-messages" role="tabpanel">...</div>
+          <div class="tab-pane fade" id="list-messages" role="tabpanel">No Prescription given...</div>
 
           <div class="tab-pane fade" id="list-settings" role="tabpanel">
-            <form class="form-group" method="post" action="func.html">
-              <label>Doctors name: </label>
-              <input type="text" name="name" placeholder="enter doctors name" class="form-control"><br>
-              <input type="submit" name="doc_sub" value="Add Doctor" class="btn btn-primary">
-            </form>
+            <label>Doctor's Name: </label>
+            <input type="text" name="name" id="doctorName" placeholder="Enter doctor's name" class="form-control"><br>
+            <input type="submit" name="doc_sub" value="Add Doctor" class="btn btn-primary" onclick="addDoctor(event)">
           </div>
+          
+          <script>
+            // Function to handle adding a doctor
+            function addDoctor(event) {
+              event.preventDefault(); // Prevent the form from submitting the default way
+          
+              // Get the doctor's name entered by the user
+              const doctorName = document.getElementById("doctorName").value.trim();
+          
+              // Check if the name is empty
+              if (doctorName === "") {
+                // Show an alert if the name is not entered
+                alert("Please enter a name for the doctor.");
+              } else {
+                // Show a success message if the doctor is added successfully
+                alert("Doctor added successfully!");
+                
+                // Optionally, clear the input field after adding the doctor
+                document.getElementById("doctorName").value = "";
+              }
+            }
+          </script>
+          
 
-          <div class="tab-pane fade" id="list-attend" role="tabpanel">...</div>
+          <div class="tab-pane fade" id="list-attend" role="tabpanel">None of the Doctors Attend the patient</div>
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- Custom Alert -->
+  <div id="alert-backdrop" class="alert-backdrop"></div>
+  <div id="custom-alert" class="custom-alert">
+    <p id="alert-message">Message here</p>
+    <button onclick="closeAlert()">OK</button>
   </div>
 
   <!-- JS scripts -->
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.all.js"></script>
   <script>
-    $(document).ready(function(){
+    function showCustomAlert(message) {
+      document.getElementById("alert-message").innerText = message;
+      document.getElementById("custom-alert").style.display = "block";
+      document.getElementById("alert-backdrop").style.display = "block";
+    }
+
+    function closeAlert() {
+      document.getElementById("custom-alert").style.display = "none";
+      document.getElementById("alert-backdrop").style.display = "none";
+    }
+
+    function gotoapp() {
+  const fname = document.getElementsByName('fname')[0].value.trim();
+  const lname = document.getElementsByName('lname')[0].value.trim();
+  const email = document.getElementsByName('email')[0].value.trim();
+  const contact = document.getElementsByName('contact')[0].value.trim();
+  const doctorSelect = document.getElementsByName('doctor')[0];
+  const paymentSelect = document.getElementsByName('payment')[0];
+
+  const doctor = doctorSelect.options[doctorSelect.selectedIndex].value;
+  const payment = paymentSelect.options[paymentSelect.selectedIndex].value;
+
+  // Check for empty fields
+  if (!fname || !lname || !email || !contact ) {
+    showCustomAlert("Please fill in all fields before submitting.");
+    return true;
+  }
+
+  // If everything is filled
+  showCustomAlert("Appointment submitted successfully!");
+  return true;
+}
+
+
+    $(document).ready(function () {
       swal({
         title: "Welcome!",
         text: "Have a nice day!",
@@ -139,5 +238,6 @@
       });
     });
   </script>
+
 </body>
 </html>
