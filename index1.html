@@ -80,12 +80,12 @@
                 <i class="fa fa-hospital-o fa-3x" aria-hidden="true" style="color:#0062cc"></i>
                 <br>
               <h3 style="margin-top: 10%">Patient Login</h3><br>
-              <form class="form-group" method="POST" action="func.html">
+              <form class="form-group">
                 <div class="row" style="margin-top: 10%">
                   <div class="col-md-4"><label>Email-ID: </label></div>
-                  <div class="col-md-8"><input type="text" name="email" class="form-control" placeholder="enter email ID" required/></div><br><br>
+                  <div class="col-md-8"><input type="text" id="e" name="email" class="form-control" placeholder="enter email ID" required/></div><br><br>
                   <div class="col-md-4" style="margin-top: 8%"><label>Password: </label></div>
-                  <div class="col-md-8" style="margin-top: 8%"><input type="password" class="form-control" name="password2" placeholder="enter password" required/></div><br><br><br>
+                  <div class="col-md-8" style="margin-top: 8%"><input id="p" type="password" class="form-control" name="password2" placeholder="enter password" required/></div><br><br><br>
                 </div>
                 <div class="row">
                  <div class="col-md-4"  style="padding-left: 160px;margin-top: 10%">
@@ -93,7 +93,7 @@
                  <!--  <div class="col-md-8" style="margin-top: 10%">
                     <a href="index.html" class="btn btn-primary">Back</a></div> -->
                     <div class="col-md-8" style="margin-top: 10%">
-                      <a type="submit" id="inputbtn" name="patsub" value="Login" class="btn btn-primary" href="func2.html" class="btn btn-secondary">Register</a>
+                      <a id="inputbtn" name="patsub" value="Login" class="btn btn-primary" onclick="gotofun1()" class="btn btn-secondary">Register</a>
                     </div>
                 </div>
               </form>
@@ -106,7 +106,22 @@
       </div>
     </div>
 
+<script>
+  function gotofun1(){
+    var pass1 = document.getElementById("p");
+    var email = document.getElementById("e");
+    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+    // Check password length and email format
+    if (pass1.value.length < 6 || !emailRegex.test(email.value)) {
+      alert("Invalid credentials: Password must be at least 6 characters and email must be valid.");
+      return false;
+    }
+
+    // Redirect if valid
+    window.location.href = "func1.html";
+  }
+</script>
 
 
 
