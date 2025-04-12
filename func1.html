@@ -1,484 +1,711 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>MedConnect</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" type="text/css" href="font-awesome-4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="style.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
-</head>
-<style type="text/css">
-  button:hover { cursor: pointer; }
-  #inputbtn:hover { cursor: pointer; }
-</style>
-<style>
-  .chat-container {
-    width: 400px;
-    height: 600px;
-    border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    background-color: white;
-  }
-  
-  .chat-header {
-    background-color: #1e88e5;
-    color: white;
-    padding: 15px 20px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  
-  .logo {
-    border-radius: 50%;
-    background-color: white;
-  }
-  
-  .header-text h3 {
-    font-weight: 500;
-    font-size: 18px;
-  }
-  
-  .header-text p {
-    font-size: 12px;
-    opacity: 0.9;
-  }
-  
-  .chat-box {
-    flex: 1;
-    padding: 20px;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  .message {
-    padding: 12px 16px;
-    border-radius: 18px;
-    max-width: 80%;
-    word-wrap: break-word;
-  }
-  
-  .user {
-    background-color: #e3f2fd;
-    color: #0d47a1;
-    align-self: flex-end;
-    border-bottom-right-radius: 4px;
-  }
-  
-  .bot {
-    background-color: #f5f5f5;
-    color: #333;
-    align-self: flex-start;
-    border-bottom-left-radius: 4px;
-  }
-  
-  .input-area {
-    display: flex;
-    padding: 15px;
-    background-color: #fff;
-    border-top: 1px solid #eaeaea;
-  }
-  
-  #user-input {
-    flex: 1;
-    padding: 12px 16px;
-    border: 1px solid #ddd;
-    border-radius: 24px;
-    outline: none;
-    font-size: 14px;
-  }
-  
-  #user-input:focus {
-    border-color: #1e88e5;
-  }
-  
-  #send-btn {
-    background-color: #1e88e5;
-    color: white;
-    border: none;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    margin-left: 10px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.2s;
-  }
-  
-  #send-btn:hover {
-    background-color: #1976d2;
-  }
-  
-  .typing {
-    display: inline-block;
-    position: relative;
-  }
-  
-  .typing::after {
-    content: "...";
-    position: absolute;
-    animation: dots 1.5s infinite;
-    width: 20px;
-    text-align: left;
-  }
-  
-  @keyframes dots {
-    0%, 20% { content: "."; }
-    40% { content: ".."; }
-    60%, 100% { content: "..."; }
-  }
-  
-  /* Hospital-specific styling elements */
-  .message.bot {
-    border-left: 3px solid #1e88e5;
-  }
-  
-  .message.user {
-    border-right: 3px solid #0d47a1;
-  }
-  #refresh-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  #refresh-btn:hover {
-    background-color: #f0f0f0; /* Optional: subtle hover effect */
-    border-radius: 5px;
-  }
-    
-.botmed{
-  right: 10px !important;
-  position: fixed !important;
-}
-.chaticon {
-position: fixed !important;
-right: 5vh;
-bottom: 5vh;
-color: #1976d2;
-animation: pulseScale 2s infinite ease-in-out;
-}
-.chaticon:hover{
-color: #0d47a1;
-}
-
-/* Keyframes for gentle scaling */
-@keyframes pulseScale {
-0% {
-  transform: scale(1);
-}
-50% {
-  transform: scale(1.1); /* Slight scale increase */
-}
-100% {
-  transform: scale(1);
-}
-}
-
-.modal-backdrop {
-  display: none;
-}
-.btnnn{
-  position: absolute;
-  right: 6vh;
-}
+  <head>
+    <meta charset="utf-8" />
+    <title>MedConnect</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="font-awesome-4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+    />
+  </head>
+  <style type="text/css">
+    button:hover {
+      cursor: pointer;
+    }
+    #inputbtn:hover {
+      cursor: pointer;
+    }
   </style>
-<body style="padding-top:50px;">
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
-    <a class="navbar-brand" href="#"><i class="fa fa-user-plus" aria-hidden="true"></i> MedConnect</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="logout.html"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a>
-        </li>
-      </ul>
-      <form class="form-inline my-2 my-lg-0" method="post" action="search.html">
-        <input class="form-control mr-sm-2" type="text" placeholder="enter contact number" name="contact">
-        <input type="submit" class="btn btn-outline-light my-2 my-sm-0" id="inputbtn" name="search_submit" value="Search">
-      </form>
-    </div>
-  </nav>
+  <style>
+    .chat-container {
+      width: 400px;
+      height: 600px;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      background-color: white;
+    }
 
-  <div class="jumbotron" id="ab1"></div>
+    .chat-header {
+      background-color: #1e88e5;
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
 
-  <div class="container-fluid" style="margin-top:50px;">
-    <div class="row">
-      <div class="col-md-4">
-        <div class="list-group" id="list-tab" role="tablist">
-          <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home">Appointment</a>
-          <a class="list-group-item list-group-item-action" href="patientdetails.html">Patient List</a>
-          <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile">Payment Status</a>
-          <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages">Prescription</a>
-          <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings">Doctors Section</a>
-          <a class="list-group-item list-group-item-action" id="list-attend-list" data-toggle="list" href="#list-attend">Attendance</a>
-        </div><br>
+    .logo {
+      border-radius: 50%;
+      background-color: white;
+    }
+
+    .header-text h3 {
+      font-weight: 500;
+      font-size: 18px;
+    }
+
+    .header-text p {
+      font-size: 12px;
+      opacity: 0.9;
+    }
+
+    .chat-box {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .message {
+      padding: 12px 16px;
+      border-radius: 18px;
+      max-width: 80%;
+      word-wrap: break-word;
+    }
+
+    .user {
+      background-color: #e3f2fd;
+      color: #0d47a1;
+      align-self: flex-end;
+      border-bottom-right-radius: 4px;
+    }
+
+    .bot {
+      background-color: #f5f5f5;
+      color: #333;
+      align-self: flex-start;
+      border-bottom-left-radius: 4px;
+    }
+
+    .input-area {
+      display: flex;
+      padding: 15px;
+      background-color: #fff;
+      border-top: 1px solid #eaeaea;
+    }
+
+    #user-input {
+      flex: 1;
+      padding: 12px 16px;
+      border: 1px solid #ddd;
+      border-radius: 24px;
+      outline: none;
+      font-size: 14px;
+    }
+
+    #user-input:focus {
+      border-color: #1e88e5;
+    }
+
+    #send-btn {
+      background-color: #1e88e5;
+      color: white;
+      border: none;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      margin-left: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.2s;
+    }
+
+    #send-btn:hover {
+      background-color: #1976d2;
+    }
+
+    .typing {
+      display: inline-block;
+      position: relative;
+    }
+
+    .typing::after {
+      content: "...";
+      position: absolute;
+      animation: dots 1.5s infinite;
+      width: 20px;
+      text-align: left;
+    }
+
+    @keyframes dots {
+      0%,
+      20% {
+        content: ".";
+      }
+      40% {
+        content: "..";
+      }
+      60%,
+      100% {
+        content: "...";
+      }
+    }
+
+    /* Hospital-specific styling elements */
+    .message.bot {
+      border-left: 3px solid #1e88e5;
+    }
+
+    .message.user {
+      border-right: 3px solid #0d47a1;
+    }
+    #refresh-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #refresh-btn:hover {
+      background-color: #f0f0f0; /* Optional: subtle hover effect */
+      border-radius: 5px;
+    }
+
+    .botmed {
+      right: 10px !important;
+      position: fixed !important;
+    }
+    .chaticon {
+      position: fixed !important;
+      right: 5vh;
+      bottom: 5vh;
+      color: #1976d2;
+      animation: pulseScale 2s infinite ease-in-out;
+    }
+    .chaticon:hover {
+      color: #0d47a1;
+    }
+
+    /* Keyframes for gentle scaling */
+    @keyframes pulseScale {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.1); /* Slight scale increase */
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .modal-backdrop {
+      display: none;
+    }
+    .btnnn {
+      position: absolute;
+      right: 6vh;
+    }
+  </style>
+  <body style="padding-top: 50px">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+      <a class="navbar-brand" href="#"
+        ><i class="fa fa-user-plus" aria-hidden="true"></i> MedConnect</a
+      >
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="logout.html"
+              ><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a
+            >
+          </li>
+        </ul>
+        <form
+          class="form-inline my-2 my-lg-0"
+          method="post"
+          action="search.html"
+        >
+          <input
+            class="form-control mr-sm-2"
+            type="text"
+            placeholder="enter contact number"
+            name="contact"
+          />
+          <input
+            type="submit"
+            class="btn btn-outline-light my-2 my-sm-0"
+            id="inputbtn"
+            name="search_submit"
+            value="Search"
+          />
+        </form>
       </div>
+    </nav>
 
-      <div class="col-md-8">
-        <div class="tab-content" id="nav-tabContent">
-          <!-- Appointment Tab -->
-          <div class="tab-pane fade show active" id="list-home">
-            <div class="container-fluid">
+    <div class="jumbotron" id="ab1"></div>
+
+    <div class="container-fluid" style="margin-top: 50px">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="list-group" id="list-tab" role="tablist">
+            <a
+              class="list-group-item list-group-item-action active"
+              id="list-home-list"
+              data-toggle="list"
+              href="#list-home"
+              >Appointment</a
+            >
+            <a
+              class="list-group-item list-group-item-action"
+              href="patientdetails.html"
+              >Patient List</a
+            >
+            <a
+              class="list-group-item list-group-item-action"
+              id="list-profile-list"
+              data-toggle="list"
+              href="#list-profile"
+              >Payment Status</a
+            >
+            <a
+              class="list-group-item list-group-item-action"
+              id="list-messages-list"
+              data-toggle="list"
+              href="#list-messages"
+              >Prescription</a
+            >
+            <a
+              class="list-group-item list-group-item-action"
+              id="list-settings-list"
+              data-toggle="list"
+              href="#list-settings"
+              >Doctors Section</a
+            >
+            <a
+              class="list-group-item list-group-item-action"
+              id="list-attend-list"
+              data-toggle="list"
+              href="#list-attend"
+              >Attendance</a
+            >
+          </div>
+          <br />
+        </div>
+
+        <div class="col-md-8">
+          <div class="tab-content" id="nav-tabContent">
+            <!-- Appointment Tab -->
+            <div class="tab-pane fade show active" id="list-home">
+              <div class="container-fluid">
+                <div class="card">
+                  <div class="card-body">
+                    <center><h4>Create an appointment</h4></center>
+                    <br />
+                    <form
+                      class="form-group"
+                      method="post"
+                      action="appointment.html"
+                    >
+                      <div class="row">
+                        <div class="col-md-4"><label>First Name:</label></div>
+                        <div class="col-md-8">
+                          <input
+                            type="text"
+                            class="form-control"
+                            name="fname"
+                          />
+                        </div>
+                        <br /><br />
+                        <div class="col-md-4"><label>Last Name:</label></div>
+                        <div class="col-md-8">
+                          <input
+                            type="text"
+                            class="form-control"
+                            name="lname"
+                          />
+                        </div>
+                        <br /><br />
+                        <div class="col-md-4"><label>Email id:</label></div>
+                        <div class="col-md-8">
+                          <input
+                            type="text"
+                            class="form-control"
+                            name="email"
+                          />
+                        </div>
+                        <br /><br />
+                        <div class="col-md-4">
+                          <label>Contact Number:</label>
+                        </div>
+                        <div class="col-md-8">
+                          <input
+                            type="text"
+                            class="form-control"
+                            name="contact"
+                          />
+                        </div>
+                        <br /><br />
+                        <div class="col-md-4"><label>Doctor:</label></div>
+                        <div class="col-md-8">
+                          <select name="doctor" class="form-control">
+                            <option value="" disabled selected>
+                              Select Doctor
+                            </option>
+                            <option value="Dr. Punam Shaw">
+                              Dr. Punam Shaw
+                            </option>
+                            <option value="Dr. Ashok Goyal">
+                              Dr. Ashok Goyal
+                            </option>
+                          </select>
+                        </div>
+                        <br /><br />
+                        <div class="col-md-4"><label>Payment:</label></div>
+                        <div class="col-md-8">
+                          <select name="payment" class="form-control">
+                            <option value="" disabled selected>
+                              Select Payment Status
+                            </option>
+                            <option value="Paid">Paid</option>
+                            <option value="Pay later">Pay later</option>
+                          </select>
+                        </div>
+                        <br /><br /><br />
+                        <div class="col-md-4">
+                          <input
+                            type="submit"
+                            name="entry_submit"
+                            value="Create new entry"
+                            class="btn btn-primary"
+                            id="inputbtn"
+                          />
+                        </div>
+                        <div class="col-md-8"></div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <br />
+            </div>
+
+            <!-- Payment Tab -->
+            <div class="tab-pane fade" id="list-profile">
               <div class="card">
                 <div class="card-body">
-                  <center><h4>Create an appointment</h4></center><br>
-                  <form class="form-group" method="post" action="appointment.html">
-                    <div class="row">
-                      <div class="col-md-4"><label>First Name:</label></div>
-                      <div class="col-md-8"><input type="text" class="form-control" name="fname"></div><br><br>
-                      <div class="col-md-4"><label>Last Name:</label></div>
-                      <div class="col-md-8"><input type="text" class="form-control" name="lname"></div><br><br>
-                      <div class="col-md-4"><label>Email id:</label></div>
-                      <div class="col-md-8"><input type="text" class="form-control" name="email"></div><br><br>
-                      <div class="col-md-4"><label>Contact Number:</label></div>
-                      <div class="col-md-8"><input type="text" class="form-control" name="contact"></div><br><br>
-                      <div class="col-md-4"><label>Doctor:</label></div>
-                      <div class="col-md-8">
-                        <select name="doctor" class="form-control">
-                          <option value="" disabled selected>Select Doctor</option>
-                          <option value="Dr. Punam Shaw">Dr. Punam Shaw</option>
-                          <option value="Dr. Ashok Goyal">Dr. Ashok Goyal</option>
-                        </select>
-                      </div><br><br>
-                      <div class="col-md-4"><label>Payment:</label></div>
-                      <div class="col-md-8">
-                        <select name="payment" class="form-control">
-                          <option value="" disabled selected>Select Payment Status</option>
-                          <option value="Paid">Paid</option>
-                          <option value="Pay later">Pay later</option>
-                        </select>
-                      </div><br><br><br>
-                      <div class="col-md-4">
-                        <input type="submit" name="entry_submit" value="Create new entry" class="btn btn-primary" id="inputbtn">
-                      </div>
-                      <div class="col-md-8"></div>                  
-                    </div>
+                  <form class="form-group" method="post" action="func.html">
+                    <input
+                      type="text"
+                      name="contact"
+                      class="form-control"
+                      placeholder="enter contact"
+                    /><br />
+                    <select name="status" class="form-control">
+                      <option value="" disabled selected>
+                        Select Payment Status to update
+                      </option>
+                      <option value="paid">paid</option>
+                      <option value="pay later">pay later</option></select
+                    ><br />
+                    <hr />
+                    <input
+                      type="submit"
+                      value="update"
+                      name="update_data"
+                      class="btn btn-primary"
+                    />
                   </form>
                 </div>
               </div>
-            </div><br>
-          </div>
+              <br /><br />
+            </div>
 
-          <!-- Payment Tab -->
-          <div class="tab-pane fade" id="list-profile">
-            <div class="card">
-              <div class="card-body">
-                <form class="form-group" method="post" action="func.html">
-                  <input type="text" name="contact" class="form-control" placeholder="enter contact"><br>
-                  <select name="status" class="form-control">
-                    <option value="" disabled selected>Select Payment Status to update</option>
-                    <option value="paid">paid</option>
-                    <option value="pay later">pay later</option>
-                  </select><br><hr>
-                  <input type="submit" value="update" name="update_data" class="btn btn-primary">
-                </form>
+            <!-- Prescription Tab -->
+            <div class="tab-pane fade" id="list-messages">...</div>
+
+            <!-- Doctor Add Tab -->
+            <div class="tab-pane fade" id="list-settings">
+              <form class="form-group" method="post" action="func.html">
+                <label>Doctors name: </label>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="enter doctors name"
+                  class="form-control"
+                /><br />
+                <input
+                  type="submit"
+                  name="doc_sub"
+                  value="Add Doctor"
+                  class="btn btn-primary"
+                />
+              </form>
+            </div>
+
+            <!-- Attendance Tab -->
+            <div class="tab-pane fade" id="list-attend">...</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="55"
+      height="55"
+      fill="currentColor"
+      class="bi bi-chat-dots-fill chaticon"
+      data-bs-backdrop="false"
+      data-bs-keyboard="false"
+      data-bs-toggle="modal"
+      data-bs-target="#exampleModal"
+      viewBox="0 0 16 16"
+    >
+      <path
+        d="M16 8c0 3.866-3.582 7-8 7a9 9 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7M5 8a1 1 0 1 0-2 0 1 1 0 0 0 2 0m4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0m3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2"
+      />
+    </svg>
+
+    <!-- data-bs-dismiss="modal" -->
+
+    <!-- Modal -->
+    <div
+      class="modal"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered botmed">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="chat-container">
+              <div class="chat-header">
+                <img
+                  src="./icons8-message-bot-48.png"
+                  alt="Hospital Logo"
+                  class="logo"
+                />
+                <div class="header-text">
+                  <h3>MedConnect</h3>
+                  <p>Healthcare Virtual Assistant</p>
+                </div>
+                <button
+                  type="button"
+                  class="btn-close btnnn"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
               </div>
-            </div><br><br>
-          </div>
-
-          <!-- Prescription Tab -->
-          <div class="tab-pane fade" id="list-messages">...</div>
-
-          <!-- Doctor Add Tab -->
-          <div class="tab-pane fade" id="list-settings">
-            <form class="form-group" method="post" action="func.html">
-              <label>Doctors name: </label>
-              <input type="text" name="name" placeholder="enter doctors name" class="form-control"><br>
-              <input type="submit" name="doc_sub" value="Add Doctor" class="btn btn-primary">
-            </form>
-          </div>
-
-          <!-- Attendance Tab -->
-          <div class="tab-pane fade" id="list-attend">...</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-  
-<svg xmlns="http://www.w3.org/2000/svg" width="55" height="55" fill="currentColor" class="bi bi-chat-dots-fill chaticon" data-bs-backdrop="false" data-bs-keyboard="false" data-bs-toggle="modal" data-bs-target="#exampleModal" viewBox="0 0 16 16">
-  <path d="M16 8c0 3.866-3.582 7-8 7a9 9 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7M5 8a1 1 0 1 0-2 0 1 1 0 0 0 2 0m4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0m3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
-</svg>
-
-
-<!-- data-bs-dismiss="modal" -->
-
-<!-- Modal -->
-<div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered botmed">
-    <div class="modal-content">
-      <div class="modal-body">
-
-        <div class="chat-container">
-          <div class="chat-header">
-            <img src="./icons8-message-bot-48.png" alt="Hospital Logo" class="logo">
-            <div class="header-text">
-              <h3>MedConnect</h3>
-              <p>Healthcare Virtual Assistant</p>
-            </div>
-            <button type="button" class="btn-close btnnn" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div id="chat-box" class="chat-box">
-            <div class="message bot">
-              Hello! I'm your virtual assistant. How can I help you today?
-            </div>
-          </div>
-          <div class="input-area">
-            <input type="text" id="user-input" placeholder="Ask information about tablets like that.." />
-            <button id="send-btn">
-              
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M22 2L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-              <button id="refresh-btn" title="Clear chat" >
-                  <img src="./icons8-refresh-80.png" alt="" width="24" height="24">
+              <div id="chat-box" class="chat-box">
+                <div class="message bot">
+                  Hello! I'm your virtual assistant. How can I help you today?
+                </div>
+              </div>
+              <div class="input-area">
+                <input
+                  type="text"
+                  id="user-input"
+                  placeholder="Ask information about tablets like that.."
+                />
+                <button id="send-btn">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M22 2L11 13"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M22 2L15 22L11 13L2 9L22 2Z"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                  <button id="refresh-btn" title="Clear chat">
+                    <img
+                      src="./icons8-refresh-80.png"
+                      alt=""
+                      width="24"
+                      height="24"
+                    />
+                  </button>
                 </button>
-            </button>
+              </div>
+            </div>
           </div>
         </div>
-
-        
       </div>
     </div>
-  </div>
-</div>
 
-
-  <!-- JavaScript -->
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.all.js"></script>
-  <script type="text/javascript">
-    $(document).ready(function() {
-      swal({
-        title: "Welcome!",
-        text: "Have a nice day!",
-        imageUrl: "images/sweet.jpg",
-        imageWidth: 400,
-        imageHeight: 200,
-        imageAlt: "Custom image",
-        animation: false
+    <!-- JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.all.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        swal({
+          title: "Welcome!",
+          text: "Have a nice day!",
+          imageUrl: "images/sweet.jpg",
+          imageWidth: 400,
+          imageHeight: 200,
+          imageAlt: "Custom image",
+          animation: false,
+        });
       });
-    });
-  </script>
-  <script>
-    const inputBox = document.getElementById('user-input');
-  const sendButton = document.getElementById('send-btn');
-  const chatBox = document.getElementById('chat-box');
-  const API_KEY = "AIzaSyBr1H8M5hQ5rIW4qetO6s4IYeozO2TSWzI";
-  const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
-  
-  // Hospital-specific prompt context to guide the AI responses
-  const HOSPITAL_CONTEXT = `You are MedAssist, a virtual assistant for a hospital. 
+    </script>
+    <script>
+      const inputBox = document.getElementById("user-input");
+      const sendButton = document.getElementById("send-btn");
+      const chatBox = document.getElementById("chat-box");
+      const API_KEY = "AIzaSyBr1H8M5hQ5rIW4qetO6s4IYeozO2TSWzI";
+      const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
+
+      // Hospital-specific prompt context to guide the AI responses
+      const HOSPITAL_CONTEXT = `You are MedAssist, a virtual assistant for a hospital. 
   Provide helpful, accurate, and compassionate responses about healthcare topics, 
   hospital services, medical information, appointment scheduling, and general patient support. 
   Keep responses brief and professional. For medical emergencies, always advise patients to call emergency services.`;
-  
-  // Function to handle sending messages (both click and Enter key)
-  function handleSendMessage() {
-  const userText = inputBox.value.trim();
-  if (userText !== "") {
-    inputBox.value = "";
-    addMessage("user", userText);
-  
-    const thinkingElement = addThinking();
-    getGeminiReply(userText)
-      .then(botReply => {
-        removeThinking(thinkingElement);
-        addMessage("bot", botReply);
-      })
-      .catch(error => {
-        removeThinking(thinkingElement);
-        addMessage("bot", "I'm sorry, I couldn't process your request at the moment. Please try again later.");
-        console.error("API Error:", error);
+
+      // Function to handle sending messages (both click and Enter key)
+      function handleSendMessage() {
+        const userText = inputBox.value.trim();
+        if (userText !== "") {
+          inputBox.value = "";
+          addMessage("user", userText);
+
+          const thinkingElement = addThinking();
+          getGeminiReply(userText)
+            .then((botReply) => {
+              removeThinking(thinkingElement);
+              addMessage("bot", botReply);
+            })
+            .catch((error) => {
+              removeThinking(thinkingElement);
+              addMessage(
+                "bot",
+                "I'm sorry, I couldn't process your request at the moment. Please try again later."
+              );
+              console.error("API Error:", error);
+            });
+        }
+      }
+
+      // Event listeners
+      inputBox.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") {
+          handleSendMessage();
+        }
       });
-  }
-  }
-  
-  // Event listeners
-  inputBox.addEventListener("keydown", function(e) {
-  if (e.key === "Enter") {
-    handleSendMessage();
-  }
-  });
-  
-  sendButton.addEventListener("click", handleSendMessage);
-  
-  function addMessage(sender, text) {
-  const messageDiv = document.createElement("div");
-  messageDiv.classList.add("message", sender);
-  messageDiv.textContent = text;
-  chatBox.appendChild(messageDiv);
-  chatBox.scrollTop = chatBox.scrollHeight;
-  }
-  
-  function addThinking() {
-  const thinking = document.createElement("div");
-  thinking.classList.add("message", "bot");
-  thinking.innerHTML = `<span class="typing">Thinking</span>`;
-  chatBox.appendChild(thinking);
-  chatBox.scrollTop = chatBox.scrollHeight;
-  return thinking;
-  }
-  
-  function removeThinking(thinkingElement) {
-  chatBox.removeChild(thinkingElement);
-  }
-  
-  async function getGeminiReply(userText) {
-  try {
-    const response = await fetch(API_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        contents: [{ 
-          parts: [{ 
-            text: `${HOSPITAL_CONTEXT}\n\nUser: ${userText}\n\nAssistant:` 
-          }] 
-        }]
-      }),
-    });
-  
-    const data = await response.json();
-    return data.candidates?.[0]?.content?.parts?.[0]?.text || "I'm sorry, I couldn't generate a response.";
-  } catch (error) {
-    console.error("API Error:", error);
-    throw error;
-  }
-  }
-  document.getElementById("refresh-btn").addEventListener("click", function () {
-    const chatBox = document.getElementById("chat-box");
-    chatBox.innerHTML = '';
-  
-    // Optional: Add a new welcome message after refresh
-    const welcomeMsg = document.createElement("div");
-    welcomeMsg.className = "message bot";
-    welcomeMsg.textContent = "Hello! I'm your virtual assistant. How can I help you today?";
-    chatBox.appendChild(welcomeMsg);
-  });
-  
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
-  
-</body>
+
+      sendButton.addEventListener("click", handleSendMessage);
+
+      function addMessage(sender, text) {
+        const messageDiv = document.createElement("div");
+        messageDiv.classList.add("message", sender);
+        messageDiv.textContent = text;
+        chatBox.appendChild(messageDiv);
+        chatBox.scrollTop = chatBox.scrollHeight;
+      }
+
+      function addThinking() {
+        const thinking = document.createElement("div");
+        thinking.classList.add("message", "bot");
+        thinking.innerHTML = `<span class="typing">Thinking</span>`;
+        chatBox.appendChild(thinking);
+        chatBox.scrollTop = chatBox.scrollHeight;
+        return thinking;
+      }
+
+      function removeThinking(thinkingElement) {
+        chatBox.removeChild(thinkingElement);
+      }
+
+      async function getGeminiReply(userText) {
+        try {
+          const response = await fetch(API_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              contents: [
+                {
+                  parts: [
+                    {
+                      text: `${HOSPITAL_CONTEXT}\n\nUser: ${userText}\n\nAssistant:`,
+                    },
+                  ],
+                },
+              ],
+            }),
+          });
+
+          const data = await response.json();
+          return (
+            data.candidates?.[0]?.content?.parts?.[0]?.text ||
+            "I'm sorry, I couldn't generate a response."
+          );
+        } catch (error) {
+          console.error("API Error:", error);
+          throw error;
+        }
+      }
+      document
+        .getElementById("refresh-btn")
+        .addEventListener("click", function () {
+          const chatBox = document.getElementById("chat-box");
+          chatBox.innerHTML = "";
+
+          // Optional: Add a new welcome message after refresh
+          const welcomeMsg = document.createElement("div");
+          welcomeMsg.className = "message bot";
+          welcomeMsg.textContent =
+            "Hello! I'm your virtual assistant. How can I help you today?";
+          chatBox.appendChild(welcomeMsg);
+        });
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
