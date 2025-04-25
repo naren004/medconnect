@@ -15,20 +15,49 @@
       body {
         background: linear-gradient(to left, #3931af, #00c6ff);
         font-family: "IBM Plex Sans", sans-serif;
-        height: 100vh; /* Full height of the viewport */
-        display: flex;
-        justify-content: center;
-        align-items: center;
         margin: 0;
       }
 
+      .navigation {
+        position: fixed; /* Fixes the navbar at the top */
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: linear-gradient(to left, #3931af, #00c6ff);
+        z-index: 1000; /* Ensures it stays on top */
+        padding: 10px 30px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .navbar-header {
+        display: flex;
+        align-items: center;
+      }
+
+      .navbar-brand {
+        color: white;
+        font-family: "IBM Plex Sans", sans-serif;
+        margin: 0;
+      }
+
+      .nav-item {
+        margin-right: 30px;
+      }
+
+      .nav-link {
+        color: white !important;
+      }
+
+      /* Adjust content to avoid being hidden under the navbar */
       .contact-form {
-        background: white; /* White background */
+        padding-top: 100px; /* Adjust the top padding to make room for the fixed navbar */
+        background: white;
         padding: 40px;
         border-radius: 15px;
         box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
         width: 100%;
         max-width: 600px;
+        margin: 0 auto;
       }
 
       .contact-form h3 {
@@ -95,7 +124,29 @@
   </head>
 
   <body>
-    <div class="container contact-form">
+    <!-- Navigation Bar -->
+    <div class="container-fluid navigation d-flex justify-content-between align-items-center">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="index.html">
+          <h5 style="margin: 0;"><i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;MedConnect</h5>
+        </a>
+      </div>
+
+      <ul class="nav">
+        <li class="nav-item">
+          <a class="nav-link" href="index.html">HOME</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="services.html">ABOUT US</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="contact.html">CONTACT</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Contact Form -->
+    <div class="container contact-form" style="margin-top: 95px;">
       <div class="contact-image">
         <img
           src="https://image.ibb.co/kUagtU/rocket_contact.png"
